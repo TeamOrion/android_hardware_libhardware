@@ -64,13 +64,14 @@ typedef enum {
     POWER_HINT_LOW_POWER = 0x00000005,
     POWER_HINT_SUSTAINED_PERFORMANCE = 0x00000006,
     POWER_HINT_VR_MODE = 0x00000007,
-    POWER_HINT_CAM_PREVIEW = 0x00000008,
-
-    POWER_HINT_CPU_BOOST    = 0x00000010,
-    POWER_HINT_LAUNCH_BOOST = 0x00000011,
-    POWER_HINT_AUDIO        = 0x00000020,
-    POWER_HINT_SET_PROFILE  = 0x00000030
-
+    POWER_HINT_LAUNCH = 0x00000008,
+    POWER_HINT_DISABLE_TOUCH = 0x00000009
+    // CM hints
+    POWER_HINT_CPU_BOOST    = 0x00000110,
+    POWER_HINT_LAUNCH_BOOST = 0x00000111,
+    POWER_HINT_AUDIO        = 0x00000112,
+    POWER_HINT_SET_PROFILE  = 0x00000113,
+    POWER_HINT_CAM_PREVIEW  = 0x00000114,
 } power_hint_t;
 
 typedef enum {
@@ -269,6 +270,14 @@ typedef struct power_module {
      *     An operation is happening where it would be ideal for the CPU to
      *     be boosted for a specific duration. The data parameter is an
      *     integer value of the boost duration in microseconds.
+     *
+     * POWER_HINT_DISABLE_TOUCH
+     *
+     *     When device enters some special modes, e.g. theater mode in Android
+     *     Wear, there is no touch interaction expected between device and user.
+     *     Touch controller could be disabled in those modes to save power.
+     *     The data parameter is non-zero when touch could be disabled, and zero
+     *     when touch needs to be re-enabled.
      *
      * A particular platform may choose to ignore any hint.
      *
